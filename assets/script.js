@@ -4,8 +4,8 @@
 
 	//Numbers
 	var num = 0;
-	var perMinute = 75;
-	var perSecond = perMinute / 60;
+	var perMinute;
+	var perSecond;
 	
 	//Element selection
 	var count = document.getElementById("count");
@@ -26,13 +26,16 @@
 		clearInterval(timer);
 		clearTimeout(delay);
 
+		perMinute = document.getElementById("txt-rate").value;
+		perSecond = perMinute / 60;
+		var updateRate = 1000/perSecond;
+
 		var startDelay = parseInt(document.getElementById('txt-start-after').value) * 1000;
 		num = parseInt(document.getElementById('txt-start').value);
 		count.innerHTML = formatNumber(num);
 
 		delay = setTimeout(function(){
-			//Run the update function once every second (1000 milliseconds)
-			timer = setInterval(update, 1000/perSecond);		
+			timer = setInterval(update, updateRate);		
 		}, startDelay)
 		
 	
